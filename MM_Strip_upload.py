@@ -1,11 +1,7 @@
 # imports packages and libraries
 import os
 import pandas as pd
-# import numpy as np
-import tkinter as tk
-from tkinter import filedialog
-# import subprocess
-# import shutil
+from tkinter import Tk,filedialog
 import xlrd
 from sqlalchemy import create_engine
 
@@ -15,7 +11,7 @@ def absfilepath(directory):
             yield os.path.abspath(os.path.join(dirpath, f))
 
 # Get data folder from user
-root = tk.Tk()
+root = Tk()
 root.withdraw()
 cmm_files = filedialog.askdirectory(title='select the folder with cmm files')
 
