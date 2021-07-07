@@ -2,7 +2,7 @@
 import os
 import pandas as pd
 from tkinter import Tk,filedialog
-import xlrd
+
 from sqlalchemy import create_engine
 
 def absfilepath(directory):
@@ -19,6 +19,7 @@ cmm_files = filedialog.askdirectory(title='select the folder with cmm files')
 def generate_cmm_result(data_file):
     df_cmm = pd.DataFrame()
     filename = os.path.basename(data_file)
+    filename = filename.split('.')[0]
     data_report = pd.read_excel(data_file, 'Report')
 
     meas_plan = data_report.iloc[3, 1]
@@ -29,8 +30,8 @@ def generate_cmm_result(data_file):
     headers = data_report.iloc[11].values
     df_report = pd.DataFrame(data_report.values[12:], columns=headers)
     df_report['Lot No'] = filename.split('_')[0]
-    df_report['Cavity'] = filename.split('_')[1][7]
-    df_report['Sample'] = filename.split('_')[2][7]
+    df_report['Cavity'] = filename.split('_')[1]
+    df_report['Sample'] = filename.split('_')[2]
     df_report['Measurement Plan'] = meas_plan
     df_report['Part No'] = part_no
     df_report['Date'] = meas_date
